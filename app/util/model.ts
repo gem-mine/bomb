@@ -59,8 +59,11 @@ export function genCondition(...items: QueryItem[]) {
 }
 
 function _filter(item, include, exclude, autoFilter) {
-  const value = item.dataValues
   let result = {}
+  if (!item) {
+    return result
+  }
+  const value = item.dataValues
   if (include) {
     include.forEach(key => {
       result[key] = value[key]
@@ -87,7 +90,7 @@ function _filter(item, include, exclude, autoFilter) {
 
 interface ToJSON {
   /** 被转换的数据 */
-  data: object[] | object
+  data: any
   /** 只包含的字段 */
   include?: string[]
   /** 排除的字段 */
@@ -97,6 +100,10 @@ interface ToJSON {
 }
 
 export function toJSON({ data, include, exclude, autoFilter = true }: ToJSON) {
+  if (typeof data !== 'object') {
+    return { data }
+  }
+  
   if (Array.isArray(data)) {
     return data.map(item => {
       return _filter(item, include, exclude, autoFilter)

@@ -8,5 +8,13 @@ declare type Exception = {
   [key: string]: string | ExceptionWithStatus
 }
 
-export { ExceptionWithStatus }
+interface ErrnoException extends Error {
+  errno?: number
+  code?: string
+  path?: string
+  syscall?: string
+  stack?: string
+}
+
+export { ExceptionWithStatus, ErrnoException }
 export default Exception

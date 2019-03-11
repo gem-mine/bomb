@@ -19,5 +19,8 @@ export declare type Config = {
    */
   CROSS_ORIGIN: CROSS_ORIGIN
 
+  /** 环境变量是否是 local，通常用于开启调试信息判断 */
+  IS_LOCAL: boolean
+
   [name: string]: any
 }
