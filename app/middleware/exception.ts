@@ -8,9 +8,10 @@ import { error as logger } from '../util/logger'
 export default exception({
   debug: config.ENV === ENV.local,
   // 将异常写入日志
-  logger(data) {
+  logger(data, ctx) {
     logger.error(data.message, {
-      detail: data
+      detail: data,
+      requestId: ctx.id
     })
   },
   notFoundPage: '404.html'

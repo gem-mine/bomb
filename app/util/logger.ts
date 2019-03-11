@@ -22,9 +22,9 @@ export const fatal = createLogger({
 export const error = createLogger({
   format: combine(
     timestamp(),
-    printf(({ timestamp, detail }) => {
+    printf(({ timestamp, requestId, detail }) => {
       const { url, method } = detail
-      return `${timestamp} ${method} ${url}: ${JSON.stringify(detail)}`
+      return `${timestamp} ${requestId} ${method} ${url}: ${JSON.stringify(detail)}`
     })
   ),
   transports: [

@@ -5,7 +5,8 @@ import { info as logger } from '../util/logger'
 // 此中间件记录所有请求日志，注意，错误日志由 exception 中间件记录
 export default async function(ctx: Context, next: () => Promise<any>) {
   const start = Date.now()
-  console.log(`>> ${ctx.method}: ${ctx.url}`)
+  const requestId = ctx.id
+  console.log(`>> ${ctx.method}: ${ctx.url} [${requestId}]`)
 
   await next()
   const end = Date.now()
@@ -13,10 +14,11 @@ export default async function(ctx: Context, next: () => Promise<any>) {
   const { req } = ctx
   const { headers, url, method } = req
 
-  console.log(`<< ${ctx.method}: ${ctx.url} ${time}ms`)
+  console.log(`<< ${ctx.method}: ${ctx.url} ${time}ms [${requestId}]`)
 
   logger.info('', {
     data: {
+      requestId,
       time,
       code: ctx.status,
       method,
