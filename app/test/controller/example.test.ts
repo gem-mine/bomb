@@ -1,4 +1,5 @@
 import app from '../../app'
+import './global'
 import request = require('supertest')
 import faker = require('faker')
 
@@ -63,5 +64,27 @@ describe('test case: example controller', () => {
       body: { pagination }
     } = await request(app.callback()).get('/examples')
     expect(pagination.total).toEqual(total - 1)
+  })
+
+  test('database transaction', async () => {
+    const res1 = await request(app.callback()).get('/examples')
+    const res2 = await request(app.callback())
+      .post(`/examples/database/transaction`)
+      .send({
+        index: 50,
+        flag: true
+      })
+    expect(res2.body.code).toBe(500)
+
+    const res3 = await request(app.callback()).get('/examples')
+    expect(res1.body.pagination.total).toEqual(res3.body.pagination.total)
+    const res4 = await request(app.callback())
+      .post(`/examples/database/transaction`)
+      .send({
+        index: 60
+      })
+    expect(res4.body.done).toBe(true)
+    const res5 = await request(app.callback()).get('/examples')
+    expect(res1.body.pagination.total + 2).toEqual(res5.body.pagination.total)
   })
 })
