@@ -13,10 +13,8 @@ logs/
 *.swp
 *.lock
 !.autod.conf.js
-
-app/**/*.js
-test/**/*.js
-config/**/*.js
+.env
 app/**/*.map
 test/**/*.map
 config/**/*.map
+.pid
