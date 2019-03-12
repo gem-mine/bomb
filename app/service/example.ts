@@ -3,6 +3,7 @@ import Example from '../model/example'
 import { genCondition } from '../util/model'
 import raise from '../util/exception'
 import EXCEPTION from '../config/constant/exception'
+import { redis } from '../util/redis'
 
 const { Op } = Sequelize
 
@@ -39,7 +40,7 @@ export default class {
   }
 
   static async getOne(id: number) {
-    const item = await Example.findById(id)
+    const item = await Example.findByPk(id)
     if (!item) {
       return raise(EXCEPTION.ITEM_NOT_EXIST)
     }
@@ -58,5 +59,27 @@ export default class {
     item._delete = true
     await item.save()
     return item
+  }
+
+  static async transaction(index: number, flag: boolean) {
+    await Example.sequelize.transaction(async t => {
+      // 增加三条后再删除一条
+      await Example.create({ name: `tom_${index}` })
+      const item = await Example.create({ name: `tom_${index + 1}` })
+      await Example.create({ name: `tom_${index + 2}` })
+      await item.destroy()
+      if (flag) {
+        raise('transaction_test')
+      }
+    })
+  }
+
+  static async setAgeCache(age: number, expire: number = 60) {
+    redis.set('age', age, 'EX', expire)
+  }
+
+  static async getAgeCache() {
+    const data = await redis.get('age')
+    return data
   }
 }
