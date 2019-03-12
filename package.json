@@ -13,7 +13,7 @@
   },
   "author": "caolvchong@gmail.com",
   "dependencies": {
-    "@gem-mine/console": "file:../console",
+    "@gem-mine/console": "^0.1.1",
     "@gem-mine/cors": "^0.1.2",
     "@gem-mine/exception": "^0.2.0",
     "@gem-mine/nunjucks": "^0.1.1",
