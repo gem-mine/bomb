@@ -5,4 +5,6 @@
 
 import { database } from '../util/database'
 
-database.sync({ force: true })
+database.sync({ force: true }).then(() => {
+  process.exit(0)
+})

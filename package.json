@@ -9,7 +9,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=local ts-node-dev app/index.ts",
     "lint": "tslint --project . app/**/*.ts app/**/*.tsx",
-    "test": "jest"
+    "test": "jest",
+    "initial": "ts-node app/script/initial.ts"
   },
   "author": "caolvchong@gmail.com",
   "dependencies": {
