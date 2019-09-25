@@ -41,7 +41,7 @@
     "source-map-support": "^0.5.10",
     "sqlite3": "^4.0.6",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^3.7.0"
+    "winston-daily-rotate-file": "^4.1.0"
   },
   "devDependencies": {
     "@types/cookie": "^0.3.2",
