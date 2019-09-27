@@ -36,7 +36,7 @@
     "mysql2": "^1.6.4",
     "path-to-regexp": "^2.4.0",
     "reflect-metadata": "^0.1.12",
-    "sequelize": "^4.42.0",
+    "sequelize": "^5.19.1",
     "sequelize-typescript": "^0.6.6",
     "source-map-support": "^0.5.10",
     "sqlite3": "^4.0.6",
