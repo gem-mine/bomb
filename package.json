@@ -55,7 +55,7 @@
     "@types/koa-static": "^4.0.0",
     "@types/node": "^10.12.18",
     "@types/supertest": "^2.0.7",
-    "cross-env": "^5.2.0",
+    "cross-env": "^6.0.3",
     "faker": "^4.1.0",
     "jest": "^23.6.0",
     "supertest": "^3.4.1",
